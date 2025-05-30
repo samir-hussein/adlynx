@@ -51,6 +51,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Match about image height with right div content only
+    function matchAboutImageHeight() {
+        // Get the content elements in the right div
+        const sectionHeader = document.querySelector('#about .section-header');
+        const paragraphs = document.querySelectorAll('#about .col-lg-6:last-child > p');
+        const featuresRow = document.querySelector('#about .col-lg-6:last-child .row');
+        const aboutImageDiv = document.querySelector('.about-image');
+        
+        if (aboutImageDiv) {
+            // Only apply custom height on desktop/tablet (screen width >= 992px)
+            if (window.innerWidth >= 992) {
+                // Calculate the actual content height
+                let contentHeight = 0;
+                
+                // Add section header height
+                if (sectionHeader) {
+                    contentHeight += sectionHeader.offsetHeight;
+                }
+                
+                // Add paragraph heights
+                paragraphs.forEach(p => {
+                    contentHeight += p.offsetHeight;
+                });
+                
+                // Add features row height
+                if (featuresRow) {
+                    contentHeight += featuresRow.offsetHeight;
+                }
+                
+                // Add margins between elements (15px between each major section)
+                contentHeight += 30;
+                
+                // Set the height of the image div to match the content height
+                aboutImageDiv.style.height = contentHeight + 'px';
+                console.log('Desktop view - Setting image height to:', contentHeight + 'px');
+            } else {
+                // For mobile, use a fixed aspect ratio height instead
+                aboutImageDiv.style.height = '300px';
+                console.log('Mobile view - Using fixed height');
+            }
+        }
+    }
+    
+    // Run on page load
+    matchAboutImageHeight();
+    
+    // Run on window resize
+    window.addEventListener('resize', matchAboutImageHeight);
+    
     backToTopButton.addEventListener('click', function(e) {
         e.preventDefault();
         window.scrollTo({
