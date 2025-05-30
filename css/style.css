@@ -558,6 +558,8 @@ a:hover {
 	margin-right: 15px;
 	color: var(--accent-color);
 	font-size: 20px;
+	min-width: 50px;
+	overflow: hidden;
 }
 
 .contact-text h5 {
@@ -580,6 +582,9 @@ a:hover {
 	color: var(--accent-color);
 	margin-right: 10px;
 	transition: var(--transition);
+	min-width: 40px;
+	overflow: hidden;
+	text-align: center;
 }
 
 .social-link:hover {
